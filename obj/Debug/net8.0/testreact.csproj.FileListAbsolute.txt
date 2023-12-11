@@ -1,0 +1,65 @@
+/home/haedan/Dokument/github/csharp/testreact (copy)/bin/Debug/net8.0/spa.proxy.json
+/home/haedan/Dokument/github/csharp/testreact (copy)/bin/Debug/net8.0/appsettings.Development.json
+/home/haedan/Dokument/github/csharp/testreact (copy)/bin/Debug/net8.0/appsettings.json
+/home/haedan/Dokument/github/csharp/testreact (copy)/bin/Debug/net8.0/testreact
+/home/haedan/Dokument/github/csharp/testreact (copy)/bin/Debug/net8.0/testreact.deps.json
+/home/haedan/Dokument/github/csharp/testreact (copy)/bin/Debug/net8.0/testreact.runtimeconfig.json
+/home/haedan/Dokument/github/csharp/testreact (copy)/bin/Debug/net8.0/testreact.dll
+/home/haedan/Dokument/github/csharp/testreact (copy)/bin/Debug/net8.0/testreact.pdb
+/home/haedan/Dokument/github/csharp/testreact (copy)/bin/Debug/net8.0/Microsoft.AspNetCore.SpaProxy.dll
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.csproj.AssemblyReference.cache
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/spa.proxy.json
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.GeneratedMSBuildEditorConfig.editorconfig
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.AssemblyInfoInputs.cache
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.AssemblyInfo.cs
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.csproj.CoreCompileInputs.cache
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.MvcApplicationPartsAssemblyInfo.cache
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.RazorAssemblyInfo.cache
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.RazorAssemblyInfo.cs
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/staticwebassets.build.json
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/staticwebassets.development.json
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/staticwebassets/msbuild.testreact.Microsoft.AspNetCore.StaticWebAssets.props
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/staticwebassets/msbuild.build.testreact.props
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.testreact.props
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.testreact.props
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/staticwebassets.pack.json
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/scopedcss/bundle/testreact.styles.css
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.csproj.CopyComplete
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.dll
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/refint/testreact.dll
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.pdb
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/testreact.genruntimeconfig.cache
+/home/haedan/Dokument/github/csharp/testreact (copy)/obj/Debug/net8.0/ref/testreact.dll
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/appsettings.Development.json
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/appsettings.json
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/spa.proxy.json
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/testreact
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/testreact.deps.json
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/testreact.runtimeconfig.json
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/testreact.dll
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/testreact.pdb
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/Microsoft.AspNetCore.SpaProxy.dll
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.csproj.AssemblyReference.cache
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/spa.proxy.json
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.GeneratedMSBuildEditorConfig.editorconfig
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.AssemblyInfoInputs.cache
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.AssemblyInfo.cs
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.csproj.CoreCompileInputs.cache
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.MvcApplicationPartsAssemblyInfo.cache
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.RazorAssemblyInfo.cache
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.RazorAssemblyInfo.cs
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.sourcelink.json
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/staticwebassets.build.json
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/staticwebassets.development.json
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/staticwebassets/msbuild.testreact.Microsoft.AspNetCore.StaticWebAssets.props
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/staticwebassets/msbuild.build.testreact.props
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.testreact.props
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.testreact.props
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/staticwebassets.pack.json
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/scopedcss/bundle/testreact.styles.css
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.csproj.CopyComplete
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.dll
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/refint/testreact.dll
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.pdb
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.genruntimeconfig.cache
+/home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/ref/testreact.dll

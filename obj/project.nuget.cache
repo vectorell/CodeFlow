@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "1luy68PuzQpInLRp7YlW792Hc2pF+fxqf9s5pXkV/JECnw5WZniaZIfyWGOH0me5RZh0rFWqi97Go2LbFE5eHA==",
+  "success": true,
+  "projectFilePath": "/home/haedan/Dokument/github/csharp/CodeFlow/testreact.csproj",
+  "expectedPackageFiles": [
+    "/home/haedan/.nuget/packages/microsoft.aspnetcore.spaproxy/6.0.25/microsoft.aspnetcore.spaproxy.6.0.25.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,8 @@
+.weather-object-container {
+    border: 1px solid white;
+    border-radius: 0.2em;
+    padding: 0.5em;
+    margin: 1em;
+    background-color: rgb(96, 135, 93);
+    color: rgb(255, 255, 255);
+}
