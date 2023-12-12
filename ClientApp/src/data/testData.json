@@ -1,7 +1,7 @@
 [
     {
         "name": "For loop",
-        "command": "for (let i = 0; i < x; i++) { //... }",
+        "command": "for (let i = 0; i < x; i++) {\n \t ... \n }",
         "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet reprehenderit optio autem, ipsam fugit pariatur explicabo eum dolorum itaque alias!",
         "related": ["something", "onething", "twothings"],
         "tag": "JavaScript"

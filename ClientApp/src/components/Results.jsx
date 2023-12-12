@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import "../styles/results.css";
 import "../styles/root.css";
 
+
 export default function Results({ searchResult }) {
     const [foundResults, setFoundResults] = useState(searchResult);
+    
 
     useEffect(() => {
         setFoundResults(searchResult);
@@ -16,15 +18,15 @@ export default function Results({ searchResult }) {
             <hr />
             {foundResults && foundResults.length > 0 ? (
                 foundResults.map((obj, index) => (
-                    <div key={index}>
+                    <details key={index} className="details">
+
+                        <summary> 
+                            <span className="tag">{obj.tag}:</span> <span className="command-name">{obj.name}</span> 
+                        </summary>
+
                         <div className="result-card">
-                            <p className="title">
-                                {" "}
-                                <span className="tag">{obj.tag}</span>:{" "}
-                                {obj.name}{" "}
-                            </p>
                             <div className="markdown">
-                                <code> {obj.command} </code>
+                                <pre> {obj.command}  </pre>
                             </div>
                             <p className="description"> {obj.description} </p>
                         </div>
@@ -37,7 +39,7 @@ export default function Results({ searchResult }) {
                                 </p>
                             ))}
                         </div>
-                    </div>
+                    </details>
                 ))
             ) : (
                 <div className="no-result-card">

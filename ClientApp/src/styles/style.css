@@ -13,7 +13,7 @@
 body {
     min-height: 100vh;
     background: #121420;
-    font-family: sans-serif;
+    font-family: Mono;
 
     /* FLEX */
     display: flex;
