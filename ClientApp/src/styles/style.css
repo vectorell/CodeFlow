@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    min-height: 100vh;
+    background: #121420;
+    font-family: sans-serif;
+
+    /* FLEX */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* SCROLL BAR */
+    -ms-overflow-style: none; /* IE + Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.App * {
+    /* Normalisering */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.App {
+    padding-top: 1em;
+    color: var(--text-color-blue);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 30em;
+    font-size: calc(0.8em + 1.1vw);
+
+    & h1 {
+        text-align: center;
+    }
+}

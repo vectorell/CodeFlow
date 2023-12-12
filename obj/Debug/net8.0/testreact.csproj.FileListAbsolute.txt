@@ -63,3 +63,5 @@
 /home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.pdb
 /home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/testreact.genruntimeconfig.cache
 /home/haedan/Dokument/github/csharp/CodeFlow/obj/Debug/net8.0/ref/testreact.dll
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/package-lock.json
+/home/haedan/Dokument/github/csharp/CodeFlow/bin/Debug/net8.0/package.json

@@ -1,0 +1,16 @@
+:root {
+    /* TEXT */
+    --text-color-faintblue: #67667b;
+    --text-color-blue: #8591ff;
+    --text-color-white: #e2e2e2;
+
+    /* GUI-COLORS */
+    --card-background: #1b2432;
+    --background-darkgrey: #2c2b3c;
+    --background-black: #1c1c1c;
+    --border-color: #3a3a3a;
+
+    /* ANIMATION */
+    --hover-duration: 0.2s;
+    --hover-scale: 1.1;
+}

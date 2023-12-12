@@ -1,0 +1,37 @@
+[
+    {
+        "name": "For loop",
+        "command": "for (let i = 0; i < x; i++) { //... }",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet reprehenderit optio autem, ipsam fugit pariatur explicabo eum dolorum itaque alias!",
+        "related": ["something", "onething", "twothings"],
+        "tag": "JavaScript"
+    },
+    {
+        "name": "For loop",
+        "command": "Another Command",
+        "description": "recess wood imminent rule noiseless functional connote ratty helpful mammoth",
+        "related": ["something", "onething", "twothings"],
+        "tag": "C#"
+    },
+    {
+        "name": "watch",
+        "command": "watch -n 2 <kommando>",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet reprehenderit optio autem, ipsam fugit pariatur explicabo eum dolorum itaque alias!",
+        "related": ["something", "onething", "twothings"],
+        "tag": "Bash"
+    },
+    {
+        "name": "Console.WriteLine();",
+        "command": "Console.WriteLine(variable);",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet reprehenderit optio autem.",
+        "related": ["something", "onething", "twothings"],
+        "tag": "C#"
+    },
+    {
+        "name": "Test Object 5",
+        "command": "Another Command",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet reprehenderit optio autem, ipsam fugit pariatur explicabo eum dolorum itaque alias!",
+        "related": ["something", "onething", "twothings"],
+        "tag": "JavaScript"
+    }
+]
