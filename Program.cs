@@ -1,9 +1,15 @@
+using System.Configuration;
+using CodeFlow.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllersWithViews();
-
+// builder.Services.AddDbContext<EntrieContext>(opt => opt.UseInMemoryDatabase("Entries"));
+builder.Services.AddDbContext<EntrieContext>(options =>
+    options.UseMySql("server=localhost;user=admin;password=KvastSkaft99;database=codeflow;", ServerVersion.AutoDetect("server=localhost;user=admin;password=KvastSkaft99;database=codeflow;"))
+);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -16,7 +22,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
 
 app.MapControllerRoute(
     name: "default",
