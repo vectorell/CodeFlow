@@ -100,15 +100,8 @@
     }
 }
 
-#results-text {
-    margin-top: 1em;
-    font-size: 0.8em;
-}
-
 .Results > .no-result-card {
-    /* width: 17em; */
-    /* width: 100%; */
-
+    text-align: center;
     & .no-results {
         margin-top: 0.5em;
     }

@@ -14,7 +14,6 @@ export default function Results({ searchResult }) {
 
     return (
         <section className="Results">
-            <p id="results-text"> Resultat: </p>
             <hr />
             {foundResults && foundResults.length > 0 ? (
                 foundResults.map((obj, index) => (

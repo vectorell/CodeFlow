@@ -16,3 +16,35 @@
         font-size: 0.7em;
     }
 }
+
+.Search > #results-text {
+    margin-top: 1em;
+    font-size: 0.8em;
+    align-self: flex-start;
+    transition: 0.3s;
+}
+
+.Search > #results-text-error {
+    color: rgb(255, 40, 40);
+    margin-top: 1em;
+    font-size: 0.8em;
+    align-self: flex-start;
+    transition: 0.3s;
+    animation: focus-error-message 2s infinite;
+}
+
+@keyframes focus-error-message {
+    0% {
+        color: var(--text-color-blue);
+        transform:scale(1);
+    }
+    50% {
+        color: rgb(255, 20, 20);
+        transform:scale(1.01);
+    }
+    
+    100% {
+        color: var(--text-color-blue);
+        transform:scale(1);
+    }
+}
