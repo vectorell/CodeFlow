@@ -1,6 +1,6 @@
 {
 "SpaProxyServer": {
-"ServerUrl": "https://localhost:44411",
+"ServerUrl": "http://localhost:44411",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
 "WorkingDirectory": "/home/haedan/Dokument/github/csharp/CodeFlow/ClientApp/",

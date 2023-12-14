@@ -3,13 +3,26 @@ using CodeFlow.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowSpecificOrigin",
+        options =>
+        {
+            options.WithOrigins("http://localhost:44411")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        }
+    );
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-// builder.Services.AddDbContext<EntrieContext>(opt => opt.UseInMemoryDatabase("Entries"));
 builder.Services.AddDbContext<EntrieContext>(options =>
     options.UseMySql("server=localhost;user=admin;password=KvastSkaft99;database=codeflow;", ServerVersion.AutoDetect("server=localhost;user=admin;password=KvastSkaft99;database=codeflow;"))
 );
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,9 +32,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors("AllowSpecificOrigin");
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

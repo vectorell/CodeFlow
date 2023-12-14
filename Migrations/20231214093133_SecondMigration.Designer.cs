@@ -2,6 +2,7 @@
 using CodeFlow.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace testreact.Migrations
 {
     [DbContext(typeof(EntrieContext))]
-    partial class EntrieContextModelSnapshot : ModelSnapshot
+    [Migration("20231214093133_SecondMigration")]
+    partial class SecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,16 +27,10 @@ namespace testreact.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Examples")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Field")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Related")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Subject")

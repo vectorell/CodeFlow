@@ -4,7 +4,7 @@ import "../styles/results.css";
 import "../styles/root.css";
 
 
-export default function Results({ searchResult }) {
+export default function Results({ searchResult, entries }) {
     const [foundResults, setFoundResults] = useState(searchResult);
     
 
@@ -20,18 +20,27 @@ export default function Results({ searchResult }) {
                     <details key={index} className="details">
 
                         <summary> 
-                            <span className="tag">{obj.tag}:</span> <span className="command-name">{obj.name}</span> 
+                            <span className="field">{obj.field}:</span> 
+                            <span className="command-subject">{obj.subject}</span> 
+                            {/* obj.id endast för dev, TODO */}
+                            <p style={{ color: 'grey', marginLeft: "0.5em"}}>(id: { obj.id})</p> 
+                            <span className="command-name">{ obj.title}</span> 
                         </summary>
 
                         <div className="result-card">
+                            <p className="info-header">Beskrivning:</p>
                             <div className="markdown">
-                                <pre> {obj.command}  </pre>
+                                <code> {obj.syntax}  </code>
                             </div>
-                            <p className="description"> {obj.description} </p>
+                            <pre className="description">{obj.description} </pre>
+                            <p className="info-header">Exempel:</p>
+                            <div className="markdown">
+                                <code> {obj.examples}  </code>
+                            </div>
                         </div>
                         <div className="related">
                             <p> Relaterat: </p>
-                            {obj.related.map((relatedObject, index) => (
+                            {obj.related?.map((relatedObject, index) => (
                                 <p key={index} className="related-subject">
                                     {" "}
                                     {relatedObject}{" "}

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import data from "../data/testData.json";
+// import data from "../data/testData.json";
 import Results from "./Results.jsx";
 import "../styles/search.css";
 import "../styles/root.css";
 
-export default function Search() {
+export default function Search({ dbEntries }) {
     // eslint-disable-next-line no-unused-vars
     const [results, setResults] = useState(null);
     const [feedbackMessage, setFeedbackMessage] = useState('Resultat:');
@@ -24,19 +24,19 @@ export default function Search() {
         } else {
             setFeedbackMessageOk(true);
             setFeedbackMessage('Resultat:')
-            let searchResult = data.filter((obj) => {
-                return obj.name.toLowerCase().includes(searchString);
+            let searchResult = dbEntries.filter((obj) => {
+                return obj.title.toLowerCase().includes(searchString);
             });
 
             searchString.length > 0
                 ? setResults(searchResult)
-                : setResults(data);
+                : setResults(dbEntries);
         }
     }
 
-    useEffect(() => {
-        setResults(data);
-    }, []);
+    // useEffect(() => {
+    //     setResults(dbEntries);
+    // }, []);
 
     return (
         <div className="Search">

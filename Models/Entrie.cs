@@ -11,7 +11,9 @@ namespace CodeFlow.Models
         public string? Title { get; set; }
         public string? Syntax { get; set; }
         public string? Examples { get; set; }
-        public string? Tag { get; set; }
-        // public Array? Related { get; set;}
+        public string? Description { get; set; }
+        public string? Field { get; set; }
+        public string? Subject { get; set; }
+        public string[]? Related { get; set;}
     }
 }
