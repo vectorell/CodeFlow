@@ -26,6 +26,26 @@
     }
 }
 
+.dropdown-item {
+    color: var(--text-color-blue);
+    padding-left: 0.5em;
+    transition: 0.2s;
+
+    &:nth-child(odd) {
+        background: var(--background-darkgrey);
+    }
+
+    &:nth-child(even) {
+        background: var(--card-background);
+    }
+
+    &:hover {
+        color: white;
+        /* transform: scale(1.05); */
+        outline: 2px solid var(--text-color-blue);
+    }
+}
+
 .sort-container {
     gap: 0.4em;
     position: absolute;

@@ -110,6 +110,7 @@ export default function Search() {
                         title={sortMessage}
                     >
                         <Dropdown.Item
+                            className="dropdown-item"
                             onClick={() => handleClick("AscName")}
                         >
                             Titel A-Ö
