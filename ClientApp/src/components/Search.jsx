@@ -15,7 +15,7 @@ export default function Search({ dbEntries }) {
 
     function handleChange() {
         const searchString = searchInputRef.current.value.toLowerCase();
-        const isSearchAccepted = /^$|^[a-zA-Z0-9\-_#.\s]+$/.test(searchString);
+        const isSearchAccepted = /^$|^[a-zA-ZåÅäÄöÖ0-9\-_#.\s]+$/.test(searchString);
 
         if (isSearchAccepted === false) {
             setFeedbackMessage("Icke tillåtna tecken funna");
@@ -29,6 +29,7 @@ export default function Search({ dbEntries }) {
                 if (
                         obj.title?.toLowerCase().includes(searchString)
                     ||  obj.syntax?.toLowerCase().includes(searchString)
+                    ||  (obj.id).toString()?.includes(searchString)
                     ||  obj.field?.toLowerCase().includes(searchString)
                     ||  obj.subject?.toLowerCase().includes(searchString)
                     ||  obj.examples?.toLowerCase().includes(searchString)
