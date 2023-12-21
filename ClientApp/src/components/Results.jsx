@@ -1,19 +1,16 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState, useRef } from "react";
-import { MdOutlineExpand } from "react-icons/md";
-import { MdExpandCircleDown } from "react-icons/md";
 import { MdOutlineExpandCircleDown } from "react-icons/md";
 import { IoIosArrowDropup } from "react-icons/io";
 import { useRecoilState } from 'recoil';
 import { entriesState } from "../recoil/entriesState";
-
+import { copyToClipboard } from "../utils";
 import "../styles/results.css";
 import "../styles/root.css";
 
 export default function Results({ searchResult }) {
     const [foundResults, setFoundResults] = useState(searchResult);
     const [isExpanded, setIsExpanded] = useState(false);
-    const [entries, setEntries] = useRecoilState(entriesState);
 
     useEffect(() => {
         setFoundResults(searchResult);
@@ -38,6 +35,9 @@ export default function Results({ searchResult }) {
                                 </div>
                                 <div className="markdown-summary">
                                     <pre>{obj.syntax}</pre>
+                                            <button className="copy-button summary"
+                                                onClick={() => copyToClipboard(obj.syntax)}
+                                            > Kopiera </button>
                                 </div>
                                 <div className="expand-div">
                                     <p> läs mer </p>
@@ -54,14 +54,16 @@ export default function Results({ searchResult }) {
                                 <pre className="description">
                                     {obj.description}{" "}
                                 </pre>
-                                {/* <div className="markdown">
-                                    <code> {obj.syntax} </code>
-                                </div> */}
                                 {obj.examples && (
                                     <>
                                         <p className="info-header">Exempel:</p>
                                         <div className="markdown">
                                             <pre>{obj.examples}</pre>
+                                            <button className="copy-button example"
+                                                onClick={() => copyToClipboard(obj.examples)}
+                                            > 
+                                                Kopiera 
+                                            </button>
                                         </div>
                                     </>
                                 )}

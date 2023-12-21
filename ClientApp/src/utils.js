@@ -71,3 +71,8 @@ export function sortByOldToNew(entries) {
 
     return sortedEntries;
 }
+
+
+export function copyToClipboard(content) {
+    navigator.clipboard.writeText(content);
+}
