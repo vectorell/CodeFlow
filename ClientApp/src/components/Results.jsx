@@ -4,13 +4,16 @@ import { MdOutlineExpand } from "react-icons/md";
 import { MdExpandCircleDown } from "react-icons/md";
 import { MdOutlineExpandCircleDown } from "react-icons/md";
 import { IoIosArrowDropup } from "react-icons/io";
+import { useRecoilState } from 'recoil';
+import { entriesState } from "../recoil/entriesState";
 
 import "../styles/results.css";
 import "../styles/root.css";
 
-export default function Results({ searchResult, entries }) {
+export default function Results({ searchResult }) {
     const [foundResults, setFoundResults] = useState(searchResult);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [entries, setEntries] = useRecoilState(entriesState);
 
     useEffect(() => {
         setFoundResults(searchResult);

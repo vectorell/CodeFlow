@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "../src/styles/style.css";
 import Search from "./components/Search";
-import fetchAllEntries from "./utils";
+import { useRecoilState } from "recoil";
+import { entriesState } from "./recoil/entriesState";
 
 export default function App() {
-    const [dbEntries, setDbEntries] = useState()
+    const [dbEntries, setDbEntries] = useState();
     const [results, setResults] = useState(null);
-    
-    async function fetchAll() {
-        let data
-        try {
-            const response = await fetch('http://localhost:5198/api/entries');
-            data = await response.json();
-            // setEntries(data);
-            console.log("App.jsx > fetchAll() > data: ", data);
-            console.log("App.jsx > fetchAll() > SORTERAT: ", data.sort((a, b) => {
-                let titleA = a.title.toUpperCase();
-                let titleB = b.title.toUpperCase();
+    const [entries, setEntries] = useRecoilState(entriesState);
 
-                if (titleA < titleB) {
-                    return -1;
-                }
-                if (titleA > titleB) {
-                    return 1;
-                }
-                return 0;
-            }))
-            // console.log("App.jsx > fetchAll() > dbEntries: ", dbEntries);
+    async function fetchAll() {
+        let data;
+        try {
+            const response = await fetch("http://localhost:5198/api/entries");
+            data = await response.json();
         } catch (error) {
             console.log(error);
         } finally {
@@ -41,22 +28,23 @@ export default function App() {
                     return 1;
                 }
                 return 0;
-            })
-            setDbEntries(sortedData)
+            });
+            setEntries(sortedData);
         }
     }
 
     useEffect(() => {
         fetchAll();
-    }, [])
+    }, []);
 
     return (
         <div className="App">
             <h1> CodeFlow </h1>
-            <Search 
-                dbEntries={dbEntries} 
+            <Search
+                dbEntries={dbEntries}
                 results={results}
-                setResults={setResults}/>
+                setResults={setResults}
+            />
         </div>
     );
 }

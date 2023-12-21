@@ -8,13 +8,41 @@
     justify-content: center;
 }
 
-.Search > input {
-    padding-left: 0.2em;
+.Search .search-container {
     width: 100%;
+    position: relative;
 
-    &::placeholder {
-        font-size: 0.7em;
+    & input {
+        padding-left: 0.2em;
+        width: 100%;
+    
+        &::placeholder {
+            font-size: 0.7em;
+        }
     }
+}
+
+.sort-container {
+    gap: 0.4em;
+    position: absolute;
+    height: 100%;
+    right: 0em;
+    height: 100%;
+    display: flex;
+    
+    & p {
+        font-size: 0.6em;
+    }
+}
+
+#dropdown-basic-button {
+    padding: 0em 0.2em;
+    height: 100%;
+    border-radius: 0px;
+    width: 6em;
+    /* align-items: center; */
+    /* justify-content: center; */
+    text-align: center;
 }
 
 .Search > #results-text {
