@@ -44,6 +44,7 @@ body::-webkit-scrollbar {
     width: 100%;
     max-width: 30em;
     font-size: calc(0.8em + 1.1vw);
+    position: relative;
 
     & h1 {
         text-align: center;
