@@ -1,10 +1,16 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { MdOutlineExpand } from "react-icons/md";
+import { MdExpandCircleDown } from "react-icons/md";
+import { MdOutlineExpandCircleDown } from "react-icons/md";
+import { IoIosArrowDropup } from "react-icons/io";
+
 import "../styles/results.css";
 import "../styles/root.css";
 
 export default function Results({ searchResult, entries }) {
     const [foundResults, setFoundResults] = useState(searchResult);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
         setFoundResults(searchResult);
@@ -28,7 +34,15 @@ export default function Results({ searchResult, entries }) {
                                     </span>
                                 </div>
                                 <div className="markdown-summary">
-                                    <code> {obj.syntax} </code>
+                                    <pre>{obj.syntax}</pre>
+                                </div>
+                                <div className="expand-div">
+                                    <p> läs mer </p>
+                                    {isExpanded ? (
+                                        <IoIosArrowDropup className="toggle-view expand" />
+                                    ) : (
+                                        <MdOutlineExpandCircleDown className="toggle-view expand" />
+                                    )}
                                 </div>
                             </summary>
 
@@ -37,14 +51,14 @@ export default function Results({ searchResult, entries }) {
                                 <pre className="description">
                                     {obj.description}{" "}
                                 </pre>
-                                <div className="markdown">
+                                {/* <div className="markdown">
                                     <code> {obj.syntax} </code>
-                                </div>
+                                </div> */}
                                 {obj.examples && (
                                     <>
                                         <p className="info-header">Exempel:</p>
                                         <div className="markdown">
-                                            <code> {obj.examples} </code>
+                                            <pre>{obj.examples}</pre>
                                         </div>
                                     </>
                                 )}

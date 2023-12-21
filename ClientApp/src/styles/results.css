@@ -56,7 +56,7 @@
         font-family: sans-serif;
         width: 100%;
     }
-    
+
     & .field {
         color: var(--text-color-blue);
         font-weight: 500;
@@ -73,7 +73,7 @@
 
     .markdown-summary {
         background: var(--background-markdown);
-        padding: 0em 0.5em;
+        padding: 0.2em 0.5em;
         margin-left: 0.5em;
         margin-right: 0.5em;
         height: fit-content;
@@ -81,13 +81,36 @@
         margin-bottom: 0.5em;
         border: 1px solid rgb(70, 70, 70);
         border-radius: 0.2em;
+        overflow-x:auto;
     }
+}
+
+.expand-div {
+    align-self: center;
+    color: rgb(163, 163, 163);
+    text-align: center;
+    display: flex;
+
+    & p {
+        font-size: 0.7em;
+        margin-right: 0.5em;
+        width: 3em;
+    }
+}
+
+.toggle-view {
+    color: rgb(163, 163, 163);
 }
 
 code {
     color: rgb(45, 219, 103);
     text-wrap: nowrap;
     font-size: 0.8em;
+}
+pre {
+    color: rgb(45, 219, 103);
+    text-wrap: nowrap;
+    font-size: 0.7em;
 }
 
 .Results > .details {

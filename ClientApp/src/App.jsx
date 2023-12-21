@@ -14,11 +14,35 @@ export default function App() {
             data = await response.json();
             // setEntries(data);
             console.log("App.jsx > fetchAll() > data: ", data);
+            console.log("App.jsx > fetchAll() > SORTERAT: ", data.sort((a, b) => {
+                let titleA = a.title.toUpperCase();
+                let titleB = b.title.toUpperCase();
+
+                if (titleA < titleB) {
+                    return -1;
+                }
+                if (titleA > titleB) {
+                    return 1;
+                }
+                return 0;
+            }))
             // console.log("App.jsx > fetchAll() > dbEntries: ", dbEntries);
         } catch (error) {
             console.log(error);
         } finally {
-            setDbEntries(data)
+            const sortedData = data.sort((a, b) => {
+                let titleA = a.title.toUpperCase();
+                let titleB = b.title.toUpperCase();
+
+                if (titleA < titleB) {
+                    return -1;
+                }
+                if (titleA > titleB) {
+                    return 1;
+                }
+                return 0;
+            })
+            setDbEntries(sortedData)
         }
     }
 
