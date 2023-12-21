@@ -110,25 +110,21 @@ export default function Search() {
                         title={sortMessage}
                     >
                         <Dropdown.Item
-                            href="#/action-1"
                             onClick={() => handleClick("AscName")}
                         >
                             Titel A-Ö
                         </Dropdown.Item>
                         <Dropdown.Item
-                            href="#/action-2"
                             onClick={() => handleClick("DescName")}
                         >
                             Titel Ö-A
                         </Dropdown.Item>
                         <Dropdown.Item
-                            href="#/action-3"
                             onClick={() => handleClick("AscNew")}
                         >
                             Nyast först
                         </Dropdown.Item>
                         <Dropdown.Item
-                            href="#/action-3"
                             onClick={() => handleClick("DescNew")}
                         >
                             Nyast sist
