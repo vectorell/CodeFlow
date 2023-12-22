@@ -13,10 +13,11 @@ import {
     sortByOldToNew,
 } from "../utils.js";
 import { sortState } from "../recoil/sortState.js";
+import { resultsState } from "../recoil/resultsState.js";
 
 export default function Search() {
     // eslint-disable-next-line no-unused-vars
-    const [results, setResults] = useState(null);
+    // const [results, setResults] = useState(null);
     const [feedbackMessage, setFeedbackMessage] = useState("Resultat:");
     const [feedbackMessageOk, setFeedbackMessageOk] = useState(true);
     const [entries, setEntries] = useRecoilState(entriesState);
@@ -25,10 +26,13 @@ export default function Search() {
     const searchInputRef = useRef(null);
     const feedbackMsgText = useRef(null);
     const [reload, setReload] = useState(false);
+    const [results, setResults] = useRecoilState(resultsState);
 
     function handleChange() {
         const searchString = searchInputRef.current.value.toLowerCase();
-        const isSearchAccepted = /^$|^[a-zA-ZåÅäÄöÖ0-9\-_#.\s]+$/.test(searchString);
+        const isSearchAccepted = /^$|^[a-zA-ZåÅäÄöÖ0-9\-_#.\s]+$/.test(
+            searchString
+        );
 
         if (isSearchAccepted === false) {
             setFeedbackMessage("Icke tillåtna tecken funna");
@@ -39,21 +43,21 @@ export default function Search() {
             setFeedbackMessage("Resultat:");
             let searchResult = entries.filter((obj) => {
                 if (
-                        obj.title?.toLowerCase().includes(searchString)
-                    ||  obj.syntax?.toLowerCase().includes(searchString)
-                    ||  (obj.id).toString()?.includes(searchString)
-                    ||  obj.field?.toLowerCase().includes(searchString)
-                    ||  obj.subject?.toLowerCase().includes(searchString)
-                    ||  obj.examples?.toLowerCase().includes(searchString)
-                    ||  obj.description?.toLowerCase().includes(searchString)
-                    ) {
-                        return obj
-                    }
+                    obj.title?.toLowerCase().includes(searchString) ||
+                    obj.syntax?.toLowerCase().includes(searchString) ||
+                    obj.id.toString()?.includes(searchString) ||
+                    obj.field?.toLowerCase().includes(searchString) ||
+                    obj.subject?.toLowerCase().includes(searchString) ||
+                    obj.examples?.toLowerCase().includes(searchString) ||
+                    obj.description?.toLowerCase().includes(searchString)
+                ) {
+                    return obj;
+                }
             });
 
             searchString.length > 0
                 ? setResults(entriesSorter(sortType, searchResult))
-                : setResults(entriesSorter(sortType, results));
+                : setResults(entriesSorter(sortType, entries));
         }
     }
 
@@ -62,27 +66,27 @@ export default function Search() {
             return;
         }
 
-        choice === "AscName" &&
-            (sortByAscendingTitle(array),
-            setSortMessage("Titel A-Ö"),
-            setSortType("AscName"));
+        let sortedArray = array; // Skapa en ny kopia av arrayen för att undvika ändringar i den ursprungliga arrayen.
 
-        choice === "DescName" &&
-            (sortByDescendingTitle(array),
-            setSortMessage("Titel Ö-A"),
-            setSortType("DescName"));
+        if (choice === "AscName") {
+            sortedArray = sortByAscendingTitle(sortedArray);
+            setSortMessage("Titel A-Ö");
+            setSortType("AscName");
+        } else if (choice === "DescName") {
+            sortedArray = sortByDescendingTitle(sortedArray);
+            setSortMessage("Titel Ö-A");
+            setSortType("DescName");
+        } else if (choice === "AscNew") {
+            sortedArray = sortByNewToOld(sortedArray);
+            setSortMessage("Nyast först");
+            setSortType("AscNew");
+        } else if (choice === "DescNew") {
+            sortedArray = sortByOldToNew(sortedArray);
+            setSortMessage("Nyast sist");
+            setSortType("DescNew");
+        }
 
-        choice === "AscNew" &&
-            (sortByNewToOld(array),
-            setSortMessage("Nyast först"),
-            setSortType("AscNew"));
-
-        choice === "DescNew" &&
-            (sortByOldToNew(array),
-            setSortMessage("Nyast sist"),
-            setSortType("DescNew"));
-
-        return array;
+        return sortedArray;
     }
 
     function handleClick(choice) {
@@ -115,19 +119,13 @@ export default function Search() {
                         >
                             Titel A-Ö
                         </Dropdown.Item>
-                        <Dropdown.Item
-                            onClick={() => handleClick("DescName")}
-                        >
+                        <Dropdown.Item onClick={() => handleClick("DescName")}>
                             Titel Ö-A
                         </Dropdown.Item>
-                        <Dropdown.Item
-                            onClick={() => handleClick("AscNew")}
-                        >
+                        <Dropdown.Item onClick={() => handleClick("AscNew")}>
                             Nyast först
                         </Dropdown.Item>
-                        <Dropdown.Item
-                            onClick={() => handleClick("DescNew")}
-                        >
+                        <Dropdown.Item onClick={() => handleClick("DescNew")}>
                             Nyast sist
                         </Dropdown.Item>
                     </DropdownButton>
@@ -138,9 +136,9 @@ export default function Search() {
                 ref={feedbackMsgText}
             >
                 {" "}
-                {feedbackMessage}{" "}
+                {feedbackMessage} {results.length > 0 ? results.length : 0}
             </p>
-            <Results searchResult={results} />
+            <Results />
         </div>
     );
 }

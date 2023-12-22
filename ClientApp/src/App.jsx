@@ -3,48 +3,42 @@ import "../src/styles/style.css";
 import Search from "./components/Search";
 import { useRecoilState } from "recoil";
 import { entriesState } from "./recoil/entriesState";
+import AddEntrie from "./components/AddEntrie";
+import fetchAllEntries, { sortByAscendingTitle } from "./utils";
+import { resultsState } from "./recoil/resultsState";
+import Results from "./components/Results";
 
 export default function App() {
     const [dbEntries, setDbEntries] = useState();
-    const [results, setResults] = useState(null);
+    const [results, setResults] = useRecoilState(resultsState);
     const [entries, setEntries] = useRecoilState(entriesState);
+    const [showAddPost, setShowAddPost] = useState(false);
+    
+
 
     async function fetchAll() {
         let data;
-        try {
-            const response = await fetch("http://localhost:5198/api/entries");
-            data = await response.json();
-        } catch (error) {
-            console.log(error);
-        } finally {
-            const sortedData = data.sort((a, b) => {
-                let titleA = a.title.toUpperCase();
-                let titleB = b.title.toUpperCase();
-
-                if (titleA < titleB) {
-                    return -1;
-                }
-                if (titleA > titleB) {
-                    return 1;
-                }
-                return 0;
-            });
-            setEntries(sortedData);
-        }
+        try { data = await fetchAllEntries() } 
+        catch (error) { console.log(error); } 
+        finally { setEntries(data), setResults(entries) }
     }
 
     useEffect(() => {
         fetchAll();
     }, []);
 
+    // useEffect(() => {
+    //     fetchAll();
+    // }, [results]);
+
     return (
         <div className="App">
-            <h1> CodeFlow </h1>
-            <Search
-                dbEntries={dbEntries}
-                results={results}
-                setResults={setResults}
-            />
+            <div className="blur" style={{ visibility: showAddPost ? 'visible' : 'hidden'}}>
+                
+            </div>
+            <h1 onClick={() => {setShowAddPost(!showAddPost)}}> CodeFlow </h1>
+            {showAddPost && <AddEntrie showAddPost={showAddPost} setShowAddPost={setShowAddPost} />}
+            <Search />
         </div>
     );
 }

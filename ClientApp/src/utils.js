@@ -9,10 +9,19 @@ export default async function fetchAllEntries() {
     return data
 }
 
+function filterNonAlphabeticalCharacters(inputString) {
+    return inputString.replace(/[^a-zA-ZåÅäÄöÖ]/g, '');
+}
+
+
+
 export function sortByAscendingTitle(entries) {
-    let sortedEntries = entries.sort((a, b) => {
-        let titleA = a.title.toUpperCase();
-        let titleB = b.title.toUpperCase();
+    // console.log('entries: ', entries);
+
+    // let sortedEntries = [...entries]
+    let sortedEntries = [...entries].sort((a, b) => {
+        let titleA = filterNonAlphabeticalCharacters(a.title.toUpperCase());
+        let titleB = filterNonAlphabeticalCharacters(b.title.toUpperCase());
 
         if (titleA < titleB) {
             return -1;
@@ -27,9 +36,9 @@ export function sortByAscendingTitle(entries) {
 }
 
 export function sortByDescendingTitle(entries) {
-    let sortedEntries = entries.sort((a, b) => {
-        let titleA = a.title.toUpperCase();
-        let titleB = b.title.toUpperCase();
+    let sortedEntries = [...entries].sort((a, b) => {
+        let titleA = filterNonAlphabeticalCharacters(a.title.toUpperCase());
+        let titleB = filterNonAlphabeticalCharacters(b.title.toUpperCase());
 
         if (titleA < titleB) {
             return 1;
@@ -44,7 +53,7 @@ export function sortByDescendingTitle(entries) {
 }
 
 export function sortByNewToOld(entries) {
-    let sortedEntries = entries.sort((a, b) => {
+    let sortedEntries = [...entries].sort((a, b) => {
 
         if (a.id < b.id) {
             return 1;
@@ -58,7 +67,7 @@ export function sortByNewToOld(entries) {
     return sortedEntries;
 }
 export function sortByOldToNew(entries) {
-    let sortedEntries = entries.sort((a, b) => {
+    let sortedEntries = [...entries].sort((a, b) => {
 
         if (a.id < b.id) {
             return -1;
@@ -75,4 +84,11 @@ export function sortByOldToNew(entries) {
 
 export function copyToClipboard(content) {
     navigator.clipboard.writeText(content);
+}
+
+export function saveFormattedText(e, input) {
+    e.preventDefault()
+    const formattedText = input.current.value.replace(/\n/g, "\n").replace(/ {4}/g, "\t");
+    console.log('formattedText: ', formattedText);
+    return formattedText;
 }

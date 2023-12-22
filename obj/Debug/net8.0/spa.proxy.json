@@ -3,7 +3,7 @@
 "ServerUrl": "http://localhost:44411",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "/home/haedan/Dokument/github/csharp/CodeFlow/ClientApp/",
+"WorkingDirectory": "/home/gost/Dokument/github/CodeFlow/ClientApp/",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

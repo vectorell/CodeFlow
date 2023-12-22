@@ -2,19 +2,24 @@
 import React, { useEffect, useState, useRef } from "react";
 import { MdOutlineExpandCircleDown } from "react-icons/md";
 import { IoIosArrowDropup } from "react-icons/io";
-import { useRecoilState } from 'recoil';
+import { useRecoilState } from "recoil";
 import { entriesState } from "../recoil/entriesState";
 import { copyToClipboard } from "../utils";
 import "../styles/results.css";
 import "../styles/root.css";
+import { resultsState } from "../recoil/resultsState";
 
-export default function Results({ searchResult }) {
-    const [foundResults, setFoundResults] = useState(searchResult);
+export default function Results() {
+    const [foundResults, setFoundResults] = useState(null);
+    // const [foundResults, setFoundResults] = useRecoilState(resultsState);
+    const [entries, setEntries] = useRecoilState(entriesState);
+    const [results, setResults] = useRecoilState(resultsState);
+
     const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
-        setFoundResults(searchResult);
-    }, [searchResult]);
+        setFoundResults(results);
+    }, [results]);
 
     return (
         <section className="Results">
@@ -33,12 +38,20 @@ export default function Results({ searchResult }) {
                                         {obj.title}
                                     </span>
                                 </div>
-                                <div className="markdown-summary">
-                                    <pre>{obj.syntax}</pre>
-                                            <button className="copy-button summary"
-                                                onClick={() => copyToClipboard(obj.syntax)}
-                                            > Kopiera </button>
-                                </div>
+                                {obj.syntax && (
+                                    <div className="markdown-summary">
+                                        <pre>{obj.syntax}</pre>
+                                        <button
+                                            className="copy-button summary"
+                                            onClick={() =>
+                                                copyToClipboard(obj.syntax)
+                                            }
+                                        >
+                                            {" "}
+                                            Kopiera{" "}
+                                        </button>
+                                    </div>
+                                )}
                                 <div className="expand-div">
                                     <p> läs mer </p>
                                     {isExpanded ? (
@@ -59,10 +72,15 @@ export default function Results({ searchResult }) {
                                         <p className="info-header">Exempel:</p>
                                         <div className="markdown">
                                             <pre>{obj.examples}</pre>
-                                            <button className="copy-button example"
-                                                onClick={() => copyToClipboard(obj.examples)}
-                                            > 
-                                                Kopiera 
+                                            <button
+                                                className="copy-button example"
+                                                onClick={() =>
+                                                    copyToClipboard(
+                                                        obj.examples
+                                                    )
+                                                }
+                                            >
+                                                Kopiera
                                             </button>
                                         </div>
                                     </>
