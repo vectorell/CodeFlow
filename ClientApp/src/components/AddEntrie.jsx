@@ -106,11 +106,11 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
 
             setEntries(await fetchAllEntries())
             setResults(await fetchAllEntries())
+            setShowAddPost(!showAddPost);
             
         } catch (error) {
             console.log('error: ', error);
         } finally {
-            setShowAddPost(!showAddPost);
             setIsLoading(false);
         }
     

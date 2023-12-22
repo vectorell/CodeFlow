@@ -206,7 +206,8 @@ pre {
         width: 100%;
         text-wrap: wrap;
         margin-bottom: 0.5em;
-        text-wrap: balance;
+        text-wrap: no-wrap;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
     & > .examples {
         font-size: 0.7em;
