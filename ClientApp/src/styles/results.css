@@ -3,6 +3,10 @@
     display: flex;
     flex-direction: column;
     background: #121420;
+
+    & hr {
+        margin-bottom: 0.5em;
+    }
 }
 
 .Results > .details {

@@ -15,7 +15,7 @@ import {
 import { sortState } from "../recoil/sortState.js";
 import { resultsState } from "../recoil/resultsState.js";
 
-export default function Search() {
+export default function Search({ showAddPost, setShowAddPost }) {
     // eslint-disable-next-line no-unused-vars
     // const [results, setResults] = useState(null);
     const [feedbackMessage, setFeedbackMessage] = useState("Resultat:");
@@ -109,6 +109,7 @@ export default function Search() {
                     onChange={handleChange}
                 />
                 <div className="sort-container">
+                    <button className="admin-button" onClick={() => setShowAddPost(true)}>Ny post +</button>
                     <DropdownButton
                         id="dropdown-basic-button"
                         title={sortMessage}

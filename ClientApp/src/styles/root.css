@@ -14,6 +14,9 @@
     --button-color-blue: rgb(13, 110, 253);
     --button-color-blue-hover: rgb(68, 143, 255);
     --button-color-blue-active: rgb(34, 76, 138);
+    --button-color-green: rgb(32, 107, 35);
+    --button-color-green-hover: rgb(29, 95, 31);
+    --button-color-green-active: rgb(24, 79, 26);
 
     /* ANIMATION */
     --hover-duration: 0.2s;

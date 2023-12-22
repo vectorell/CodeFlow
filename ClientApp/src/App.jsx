@@ -31,14 +31,31 @@ export default function App() {
     //     fetchAll();
     // }, [results]);
 
+    useEffect(() => {
+        function handleEscapeKey(e) {
+            if (e.key === 'Escape') {
+                setShowAddPost(false);
+            }
+        }
+        document.addEventListener('keydown', handleEscapeKey)
+        return () => { document.removeEventListener('keydown', handleEscapeKey);}
+    }, [])
+
+
+    function handleEvent(e) {
+        if (showAddPost === true)
+        setShowAddPost(false);
+    }
+
+
     return (
-        <div className="App">
-            <div className="blur" style={{ visibility: showAddPost ? 'visible' : 'hidden'}}>
+        <div className="App" >
+            <div className="blur" onMouseDown={handleEvent} style={{ visibility: showAddPost ? 'visible' : 'hidden'}}>
                 
             </div>
-            <h1 onClick={() => {setShowAddPost(!showAddPost)}}> CodeFlow </h1>
+            <h1> CodeFlow </h1>
             {showAddPost && <AddEntrie showAddPost={showAddPost} setShowAddPost={setShowAddPost} />}
-            <Search />
+            <Search showAddPost={showAddPost} setShowAddPost={setShowAddPost}/>
         </div>
     );
 }

@@ -15,13 +15,24 @@
     border: 15px solid var(--background-darkgrey);
     border-radius: 0em 0em 0.3em 0.3em;
     z-index: 10;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.767);
 
     & input {
-        padding-left: 0.2em;
+        padding-left: 0.5em;
         width: 100%;
-    
+        background-color: rgb(34, 34, 34);
+        color: white;
+        border: none;
+        transition: 0.1s;
+        outline: 0px solid var(--button-color-blue);
+        
         &::placeholder {
             font-size: 0.7em;
+        }
+        
+        &:focus {
+            transition: 0.2s;
+            outline: 2px solid var(--button-color-blue);
         }
     }
 }
@@ -51,8 +62,10 @@
     position: absolute;
     height: 100%;
     right: 0em;
-    height: 100%;
+    /* height: 100%; */
     display: flex;
+
+
     
     & p {
         font-size: 0.6em;
@@ -67,6 +80,20 @@
     /* align-items: center; */
     /* justify-content: center; */
     text-align: center;
+}
+
+.admin-button {
+    font-size: 0.75em;
+    margin-top: 0.1em;
+    height: 2.05em;
+    padding: 0em 0.5em;
+    background: var(--button-color-green);
+    border: none;
+    color: white;
+    transition: 0.2s;
+
+    &:hover {background: var(--button-color-green-hover);}
+    &:active {background: var(--button-color-green-active);}
 }
 
 .Search > #results-text {

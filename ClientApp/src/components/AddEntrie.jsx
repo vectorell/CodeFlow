@@ -4,8 +4,13 @@ import fetchAllEntries, { saveFormattedText, sortByAscendingTitle } from "../uti
 import { useRecoilState } from "recoil";
 import { entriesState } from "../recoil/entriesState";
 import { resultsState } from "../recoil/resultsState";
+import { FaWindowClose } from "react-icons/fa";
+import { ImSpinner7 } from "react-icons/im";
+
+
 
 export default function AddEntrie({ showAddPost, setShowAddPost }) {
+    const [isLoading, setIsLoading] = useState(false);
     const [entries, setEntries] = useRecoilState(entriesState);
     const [results, setResults] = useRecoilState(resultsState);
     const [showErrorMessageTitle, setShowErrorMessageTitle] = useState(false);
@@ -94,6 +99,7 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
         }
 
         try {
+            setIsLoading(true);
             const response = await fetch("http://localhost:5198/api/entries", options);
             let data = await response.json();
             console.log(data);
@@ -104,7 +110,8 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
         } catch (error) {
             console.log('error: ', error);
         } finally {
-            setShowAddPost(!showAddPost)
+            setShowAddPost(!showAddPost);
+            setIsLoading(false);
         }
     
     }
@@ -126,16 +133,25 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
 
 
 
+
     return (
         <div className="AddEntrie">
-
+            <FaWindowClose id="close-post" onClick={() => setShowAddPost(false)}/>
             <div className="title">
-                <h1 onClick={() => setShowAddPost(!showAddPost)}> Lägg till en post </h1>
+                <h1 onClick={() => setShowAddPost(!showAddPost)}> Ny post + </h1>
             </div>
 
             <form action="#">
+
                 <div className="form-field">
-                    <p className="input-description">Titel <span className="input-msg" 
+                    <p className="input-description">Område <span className="required">*</span><span className="input-msg" 
+                    ref={fieldMsgRef}> {showErrorMessageField && 'obligatoriskt'} </span></p>
+
+                    <input ref={fieldRef} onChange={() => setShowErrorMessageField(false)} type="text" placeholder=" .. Bash, MySQL etc"/>
+                </div>
+
+                <div className="form-field">
+                    <p className="input-description">Titel <span className="required">*</span><span className="input-msg" 
                     ref={titleMsgRef}> {showErrorMessageTitle && 'obligatoriskt'} </span></p>
                     <input ref={titleRef} onChange={() => setShowErrorMessageTitle(false)} type="text" placeholder=" ...till exempel 'Lista alla databaser'"/>
                 </div>
@@ -146,22 +162,16 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
                 </div>
 
                 <div className="form-field">
+                    <p className="input-description">Beskrivning <span className="required">*</span><span className="input-msg" 
+                    ref={descriptionMsgRef}> {showErrorMessageDescription && 'obligatoriskt (minst 4 tecken)'} </span> </p>
+                    <textarea ref={descriptionRef} onChange={() => setShowErrorMessageDescription(false)} name="Beskrivning" cols="5" rows="5" placeholder=""></textarea>
+                </div>
+
+                <div className="form-field">
                     <p className="input-description">Exempel</p>
                     <textarea ref={exampleRef} onKeyDown={(e) => handleKeyDown(e)} name="Exempel" id="example-text" cols="5" rows="5" placeholder=" Exempel"></textarea>
                 </div>
 
-                <div className="form-field">
-                    <p className="input-description">Beskrivning <span className="input-msg" 
-                    ref={descriptionMsgRef}> {showErrorMessageDescription && 'obligatoriskt (minst 4 tecken)'} </span> </p>
-                    <textarea ref={descriptionRef} onKeyDown={(e) => handleKeyDown(e)} onChange={() => setShowErrorMessageDescription(false)} name="Beskrivning" cols="5" rows="5" placeholder=" Beskrivning"></textarea>
-                </div>
-
-                <div className="form-field">
-                    <p className="input-description">Område <span className="input-msg" 
-                    ref={fieldMsgRef}> {showErrorMessageField && 'obligatoriskt'} </span></p>
-
-                    <input ref={fieldRef} onChange={() => setShowErrorMessageField(false)} type="text" placeholder=" Område (Bash, MySQL etc)"/>
-                </div>
 
                 <div className="form-field">
                     <p className="input-description">Ämne</p>
@@ -175,9 +185,9 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
 
                 <div className="add-entrie-buttons-container">
                     <button onClick={(e) => {e.preventDefault(), setShowAddPost(!showAddPost)}}> Avbryt </button>
-                    <button onClick={(e) => handleSend(e)}> Skicka </button>
+                    <button onClick={(e) => handleSend(e)}> {isLoading ? <ImSpinner7 className="loader"/> : 'Skicka'} </button>
                 </div>
-
+                <p id="obligatory">* = obligatoriskt</p>
             </form>
         </div>
     );
