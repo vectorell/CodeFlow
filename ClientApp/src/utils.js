@@ -9,6 +9,28 @@ export default async function fetchAllEntries() {
     return data
 }
 
+export async function editEntrie(entrieObject) {
+    console.log('entrieObject: ', entrieObject);
+    const options = {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(entrieObject)
+    }
+    
+    try {
+        // setIsLoading(true);
+        const response = await fetch(`http://localhost:5198/api/entries/${entrieObject.id}`, options);
+        // let data = await response.json();
+        // console.log(data);
+        
+    } catch (error) {
+        console.log('error: ', error);
+    } finally {
+        // setIsLoading(false);
+    }
+
+}
+
 export function filterNonAlphabeticalCharacters(inputString) {
     return inputString.replace(/[^a-zA-ZåÅäÄöÖ]/g, '');
 }
@@ -106,7 +128,8 @@ export function copyToClipboard(content) {
 
 export function saveFormattedText(e, input) {
     e.preventDefault()
-    const formattedText = input.current.value.replace(/\n/g, "\n").replace(/ {4}/g, "\t");
+    console.log('saveFormattedText() > input: ', input );
+    const formattedText = input.current.value?.replace(/\n/g, "\n").replace(/ {4}/g, "\t");
     console.log('formattedText: ', formattedText);
     return formattedText;
 }

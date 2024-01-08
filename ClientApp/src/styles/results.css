@@ -46,7 +46,8 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
-        margin-bottom: 0.2em;
+        /* margin-bottom: 0.2em; */
+        align-items: flex-end;
     }
 
     .summary-text {
@@ -260,4 +261,64 @@ pre {
     & .no-results {
         margin-top: 0.5em;
     }
+}
+
+.input-edit {
+    background-color: black;
+    outline: none;
+    border: none;
+    color: white;
+    height: 1.5em;
+    font-size: 1em;
+    /* width: fit-content; */
+    /* margin-right: 1em; */
+    font-family: sans-serif;
+}
+
+.textarea-edit {
+    font-family: sans-serif;
+    /* width: 97%; */
+    align-self: center;
+    font-size: 0.7em;
+    /* height: 100%;; */
+    resize: none;
+    overflow-y: hidden;
+}
+
+input::placeholder{
+    color: rgb(79, 97, 132);
+}
+
+#field-edit {
+    width: 10em;
+    color: var(--text-color-blue);
+    font-size: 0.7em;
+}
+
+#title-edit {
+    padding: 0em;
+    min-height: 100%;
+    width: 100%;
+    font-size: 0.7em;
+}
+
+#description-edit {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+#textarea-syntax, #textarea-examples {
+    color: var(--text-color-green);
+    font-size: 0.55em;
+    font-family: monospace;
+    margin: 0.5em;
+    padding-left: 0.5em;
+}
+
+.edit-field-title-container {
+    display: flex;
+    justify-content: start;
+    gap: 0.5em;
+    padding: 0.3em 0.5em 0em 0.5em;
+    width: 100%;
 }
