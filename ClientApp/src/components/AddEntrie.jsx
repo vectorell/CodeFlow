@@ -56,20 +56,25 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
 
         let isFieldSelected = selectRef.current.value === "defaultSelect" ? false : true;
 
-        if (isFieldSelected) {
-            fieldRef.current.value = selectRef.current.value
-        } 
-
-        const isFieldValid = (
+        const isFieldInputValid = (
             fieldRef.current.value 
-            && fieldRef.current.value.length > 0
+            && fieldRef.current.value.length >= 3
             && typeof fieldRef.current.value === 'string' 
             ? true : false
         );
 
+        let field
+        if (!isFieldSelected && isFieldInputValid) {
+            field = fieldRef.current.value
+        } else if (isFieldSelected && !isFieldInputValid) {
+            field = selectRef.current.value
+        } else {
+            field = ''
+        }
+
         if (!isTitleValid) { setShowErrorMessageTitle(true); }
         if (!isDescriptionValid) { setShowErrorMessageDescription(true); }
-        if (!isFieldValid && !isFieldSelected) { setShowErrorMessageField(true); }
+        if (!isFieldInputValid && !isFieldSelected) { setShowErrorMessageField(true); }
         if (!isDescriptionValid || !isTitleValid) { return }
 
         // Förbered related-array
@@ -94,7 +99,7 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
             syntax: saveFormattedText(e, syntaxRef),
             examples: saveFormattedText(e, exampleRef),
             description: saveFormattedText(e, descriptionRef),
-            field: fieldRef.current.value,
+            field: field,
             subject: subjectRef.current.value,
             related: finishedRelatedArray
         };

@@ -22,9 +22,9 @@ namespace CodeFlow.Models
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "Ämne är obligatoriskt.")]
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "Ämne måste vara mellan 3 och 20 tecken långt.")]
+        [StringLength(20, MinimumLength = 1, ErrorMessage = "Ämne måste vara mellan 3 och 20 tecken långt.")]
         public string? Field { get; set; }
-        
+
         public string? Subject { get; set; }
         public string[]? Related { get; set;}
     }
