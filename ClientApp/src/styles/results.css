@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     background: #121420;
+    gap: 1em;
 
     & hr {
         margin-bottom: 0.5em;
@@ -38,7 +39,7 @@
     border-bottom: none;
     padding: 0.5em;
     padding-bottom: 0.5em;
-    background-color: #1b2432;
+    background: linear-gradient(10deg, #1c2738, #171f29 80%, #243851) ;
     position: relative;
 
     .summary-header {
@@ -153,7 +154,7 @@ pre {
 .Results .result-card {
     padding: 0em 2em 1.5em 2em;
     width: 100%;
-    background-color: #2b3749;
+    background: linear-gradient(140deg, #2c3a4f, #171f29 80%, #243851) ;
     position: relative;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.778) inset;
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.778) inset;
@@ -217,7 +218,9 @@ pre {
 }
 
 .Results .related {
-    background: #2c2b3c;
+    /* background: #2c2b3c; */
+    background: #101319;
+    border-top: 2px solid rgb(20, 27, 39);
     color: var(--text-color-white);
     width: 100%;
     display: flex;
@@ -233,17 +236,17 @@ pre {
 
     & > .related-subject {
         margin-left: 0.5em;
-        color: rgb(175, 175, 175);
+        color: rgb(93, 118, 155);
         font-size: 0.7em;
-        border: 1px solid var(--border-color);
         border-radius: 0.3em;
         height: fit-content;
         padding: 0em 0.4em;
         transition: 0.2s;
         font-family: monospace;
         font-size: 0.6em;
-
+        
         &:hover {
+            /* border: 1px solid var(--border-color); */
             transform: scale(var(--hover-scale));
             background: var(--background-black);
             cursor: pointer;

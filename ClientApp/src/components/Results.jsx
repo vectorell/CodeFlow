@@ -85,9 +85,9 @@ export default function Results() {
                                         </div>
                                     </>
                                 )}
+                                
                             </div>
-                        </details>
-                        <div className="related">
+                            <div className="related">
                             <p> Relaterat: </p>
                             {obj.related?.length > 0 &&
                                 obj.related?.map((relatedObject, index) => (
@@ -97,6 +97,8 @@ export default function Results() {
                                     </p>
                                 ))}
                         </div>
+                        </details>
+
                     </div>
                 ))
             ) : (

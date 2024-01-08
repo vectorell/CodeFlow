@@ -159,3 +159,20 @@ textarea {
     0% {transform:rotateZ(0deg);}
     100% {transform:rotateZ(360deg);}
 }
+
+#request-error {
+    color: white;
+}
+
+.AddEntrie .field-input-container {
+    display: flex;
+    gap: 1em;
+    margin-bottom: 0.5em;
+}
+
+select {
+    font-size: 0.8em;
+    background: var(--background-black);
+    color: var(--text-color-white);
+    border-radius: 0.2em;
+}

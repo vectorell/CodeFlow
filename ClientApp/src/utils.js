@@ -9,11 +9,29 @@ export default async function fetchAllEntries() {
     return data
 }
 
-function filterNonAlphabeticalCharacters(inputString) {
+export function filterNonAlphabeticalCharacters(inputString) {
     return inputString.replace(/[^a-zA-ZåÅäÄöÖ]/g, '');
 }
 
+export function sortByAscending(entries) {
+    // console.log('entries: ', entries);
 
+    // let sortedEntries = [...entries]
+    let sortedEntries = [...entries].sort((a, b) => {
+        let titleA = filterNonAlphabeticalCharacters(a.toUpperCase());
+        let titleB = filterNonAlphabeticalCharacters(b.toUpperCase());
+
+        if (titleA < titleB) {
+            return -1;
+        }
+        if (titleA > titleB) {
+            return 1;
+        }
+        return 0;
+    })
+
+    return sortedEntries;
+}
 
 export function sortByAscendingTitle(entries) {
     // console.log('entries: ', entries);

@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../styles/addentrie.css";
-import fetchAllEntries, { saveFormattedText, sortByAscendingTitle } from "../utils";
+import fetchAllEntries, { filterNonAlphabeticalCharacters, saveFormattedText, sortByAscending, sortByAscendingTitle } from "../utils";
 import { useRecoilState } from "recoil";
 import { entriesState } from "../recoil/entriesState";
 import { resultsState } from "../recoil/resultsState";
@@ -11,6 +11,7 @@ import { ImSpinner7 } from "react-icons/im";
 
 export default function AddEntrie({ showAddPost, setShowAddPost }) {
     const [isLoading, setIsLoading] = useState(false);
+    const [requestErrorMessage, setRequestErrorMessage] = useState(' ');
     const [entries, setEntries] = useRecoilState(entriesState);
     const [results, setResults] = useRecoilState(resultsState);
     const [showErrorMessageTitle, setShowErrorMessageTitle] = useState(false);
@@ -29,6 +30,8 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
     const fieldMsgRef = useRef(null);
     const subjectRef = useRef(null);
     const relatedRef = useRef(null);
+    const reqErrorMsgRef = useRef(null);
+    const selectRef = useRef(null);
     
     async function handleSend(e) {
         e.preventDefault()
@@ -51,6 +54,12 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
             ? true : false
         );
 
+        let isFieldSelected = selectRef.current.value === "defaultSelect" ? false : true;
+
+        if (isFieldSelected) {
+            fieldRef.current.value = selectRef.current.value
+        } 
+
         const isFieldValid = (
             fieldRef.current.value 
             && fieldRef.current.value.length > 0
@@ -60,7 +69,7 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
 
         if (!isTitleValid) { setShowErrorMessageTitle(true); }
         if (!isDescriptionValid) { setShowErrorMessageDescription(true); }
-        if (!isFieldValid) { setShowErrorMessageField(true); }
+        if (!isFieldValid && !isFieldSelected) { setShowErrorMessageField(true); }
         if (!isDescriptionValid || !isTitleValid) { return }
 
         // Förbered related-array
@@ -106,7 +115,12 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
 
             setEntries(await fetchAllEntries())
             setResults(await fetchAllEntries())
-            setShowAddPost(!showAddPost);
+
+            if (response.ok) {
+                setShowAddPost(!showAddPost);
+            } else {
+                setRequestErrorMessage(data.title)
+            }
             
         } catch (error) {
             console.log('error: ', error);
@@ -131,8 +145,19 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
         }
     }
 
+    function uniqueFields() {
+        let uniqueArray = [];
+        entries.forEach(entrie => {
+                if (!uniqueArray.includes(entrie.field)) {
+                    uniqueArray.push(entrie.field)
+                }
+            })
+        return uniqueArray
+    }
 
-
+    function handleSelect() {
+            fieldRef.current.value = '';
+    }
 
     return (
         <div className="AddEntrie">
@@ -143,51 +168,70 @@ export default function AddEntrie({ showAddPost, setShowAddPost }) {
 
             <form action="#">
 
+                {/* OMRÅDE */}
                 <div className="form-field">
-                    <p className="input-description">Område <span className="required">*</span><span className="input-msg" 
-                    ref={fieldMsgRef}> {showErrorMessageField && 'obligatoriskt'} </span></p>
 
-                    <input ref={fieldRef} onChange={() => setShowErrorMessageField(false)} type="text" placeholder=" .. Bash, MySQL etc"/>
+                    <p className="input-description">Område <span className="required">*</span><span className="input-msg" 
+                    ref={fieldMsgRef}> {showErrorMessageField && 'obligatoriskt (välj i menyn eller ange 3-20 tecken)'} </span></p>
+
+                    <div className="field-input-container">
+                        <select ref={selectRef} onClick={() => handleSelect()} name="Område" id="">
+                            <option value="defaultSelect"> Välj område </option>
+                            { 
+                                sortByAscending(uniqueFields()).map((entrie, index) => ( 
+                                    <option value={entrie} key={index}> {entrie} </option> 
+                            ))}
+                        </select>
+                        <input ref={fieldRef} onChange={() => setShowErrorMessageField(false)} type="text" placeholder=" .. eller skriv in nytt"/>
+                    </div>
                 </div>
 
+                {/* TITEL */}
                 <div className="form-field">
                     <p className="input-description">Titel <span className="required">*</span><span className="input-msg" 
-                    ref={titleMsgRef}> {showErrorMessageTitle && 'obligatoriskt'} </span></p>
+                    ref={titleMsgRef}> {showErrorMessageTitle && 'obligatoriskt (3-50 tecken)'} </span></p>
                     <input ref={titleRef} onChange={() => setShowErrorMessageTitle(false)} type="text" placeholder=" ...till exempel 'Lista alla databaser'"/>
                 </div>
 
+                {/* SYNTAX */}
                 <div className="form-field">
                     <p className="input-description">Syntax</p>
                     <textarea ref={syntaxRef} onKeyDown={(e) => handleKeyDown(e)} name="Syntax" id="syntax-text" cols="5" rows="5" placeholder=" ...till exempel 'SHOW DATABASES;'"></textarea>
                 </div>
 
+                {/* BESKRIVNING */}
                 <div className="form-field">
                     <p className="input-description">Beskrivning <span className="required">*</span><span className="input-msg" 
                     ref={descriptionMsgRef}> {showErrorMessageDescription && 'obligatoriskt (minst 4 tecken)'} </span> </p>
                     <textarea ref={descriptionRef} onChange={() => setShowErrorMessageDescription(false)} name="Beskrivning" cols="5" rows="5" placeholder=""></textarea>
                 </div>
 
+                {/* EXEMPEL */}
                 <div className="form-field">
                     <p className="input-description">Exempel</p>
                     <textarea ref={exampleRef} onKeyDown={(e) => handleKeyDown(e)} name="Exempel" id="example-text" cols="5" rows="5" placeholder=" Exempel"></textarea>
                 </div>
 
 
+                {/* ÄMNE */}
                 <div className="form-field">
                     <p className="input-description">Ämne</p>
                     <input ref={subjectRef} type="text" placeholder=" Ämne (kommando, genväg etc)"/>
                 </div>
 
+                {/* RELATERAT */}
                 <div className="form-field">
                     <p className="input-description">Relaterat (separera med ",")</p>
                     <input ref={relatedRef} type="text" placeholder=" Relaterat"/>
                 </div>
 
+                {/* KNAPPAR */}
                 <div className="add-entrie-buttons-container">
                     <button onClick={(e) => {e.preventDefault(), setShowAddPost(!showAddPost)}}> Avbryt </button>
                     <button onClick={(e) => handleSend(e)}> {isLoading ? <ImSpinner7 className="loader"/> : 'Skicka'} </button>
                 </div>
                 <p id="obligatory">* = obligatoriskt</p>
+                <p id="request-error" ref={reqErrorMsgRef}> {requestErrorMessage} </p>
             </form>
         </div>
     );

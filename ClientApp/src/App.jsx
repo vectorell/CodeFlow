@@ -19,7 +19,7 @@ export default function App() {
     async function fetchAll() {
         let data;
         try { data = await fetchAllEntries() } 
-        catch (error) { console.log(error); } 
+        catch (error) { console.error(error); } 
         finally { setEntries(data), setResults(entries) }
     }
 
