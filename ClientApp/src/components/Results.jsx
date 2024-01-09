@@ -4,7 +4,7 @@ import { MdOutlineExpandCircleDown } from "react-icons/md";
 import { IoIosArrowDropup } from "react-icons/io";
 import { useRecoilState } from "recoil";
 import { entriesState } from "../recoil/entriesState";
-import { copyToClipboard, editEntrie } from "../utils";
+import { copyToClipboard, deleteEntrie, editEntrie } from "../utils";
 import "../styles/results.css";
 import "../styles/root.css";
 import { resultsState } from "../recoil/resultsState";
@@ -22,6 +22,7 @@ export default function Results() {
     const [editPosts, setEditPosts] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
     const [relatedArray, setRelatedArray] = useState([]);
+    const [verify, setVerify] = useState(false);
 
     const fieldInputRef = useRef(null);
     const titleInputRef = useRef(null);
@@ -140,9 +141,18 @@ export default function Results() {
     }, [editPosts]);
 
     function handleDeleteRelated(obj, index) {
-
         if (!relatedArray.includes(obj.related[index])) {
             setRelatedArray( relatedArray + obj.related[index])
+        }
+    }
+
+    async function handleDeleteEntrie(id) {
+        try {
+            await deleteEntrie(id);
+            setEntries(await fetchAllEntries());
+            setResults(await fetchAllEntries());
+        } catch (err) {
+            console.log(err)
         }
     }
 
@@ -315,7 +325,7 @@ export default function Results() {
                                     )
                                 }
 
-                                {/* SECTION FOR EDIT/SAVE/CANCEL BUTTONS */}
+                                {/* SECTION FOR EDIT/SAVE/CANCEL/DELETE BUTTONS */}
                                 <div className="edit-buttons-container">
                                     {!editPosts[obj.id] === true ? (
                                         // Edit-button
@@ -327,14 +337,31 @@ export default function Results() {
                                             }} > Redigera post
                                         </button>
                                     ) : (
-                                        <div className>
+                                        <div>
+                                            {/* Delete-button */}
+                                            {verify === false ? 
+                                                <button 
+                                                className="delete-entrie-button"
+                                                onClick={() => setVerify(!verify)}> Radera post </button>
+                                                :
+                                                <button 
+                                                className="delete-entrie-button"
+                                                onClick={() => {
+                                                    handleDeleteEntrie(obj.id),
+                                                    setVerify(!verify)
+                                                }
+                                            
+                                            }> Är du säker? </button>
+                                            }
+
                                             {/* Cancel-button */}
                                             <button
                                             className="entrie-edit-button"
                                             id="edit-post-button-cancel"
                                             onClick={() =>{
                                                 setEditPosts(!editPosts),
-                                                setRelatedArray([])
+                                                setRelatedArray([]),
+                                                setVerify(false)
                                                 }}> Avbryt 
                                             </button>
 

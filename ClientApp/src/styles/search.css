@@ -127,3 +127,9 @@
         transform:scale(1);
     }
 }
+
+.delete-entrie-button {
+    position: absolute;
+    left: 0em;
+    bottom: 0em;
+}

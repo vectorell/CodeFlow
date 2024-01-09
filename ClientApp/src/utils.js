@@ -10,7 +10,6 @@ export default async function fetchAllEntries() {
 }
 
 export async function editEntrie(entrieObject) {
-    console.log('entrieObject: ', entrieObject);
     const options = {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -18,17 +17,23 @@ export async function editEntrie(entrieObject) {
     }
     
     try {
-        // setIsLoading(true);
         const response = await fetch(`http://localhost:5198/api/entries/${entrieObject.id}`, options);
-        // let data = await response.json();
-        // console.log(data);
-        
     } catch (error) {
         console.log('error: ', error);
-    } finally {
-        // setIsLoading(false);
     }
+}
 
+export async function deleteEntrie(id) {
+    const options = {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+    }
+    
+    try {
+        const response = await fetch(`http://localhost:5198/api/entries/${id}`, options);
+    } catch (error) {
+        console.log('error: ', error);
+    }
 }
 
 export function filterNonAlphabeticalCharacters(inputString) {
