@@ -11,6 +11,8 @@ import { resultsState } from "../recoil/resultsState";
 import EditEntrie from "./EditEntrie";
 import { saveFormattedText } from "../utils";
 import fetchAllEntries from "../utils";
+import { IoMdCloseCircle } from "react-icons/io";
+
 
 export default function Results() {
     const [foundResults, setFoundResults] = useState(null);
@@ -19,12 +21,14 @@ export default function Results() {
     const [results, setResults] = useRecoilState(resultsState);
     const [editPosts, setEditPosts] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [relatedArray, setRelatedArray] = useState([]);
 
     const fieldInputRef = useRef(null);
     const titleInputRef = useRef(null);
     const syntaxInputRef = useRef(null);
     const descriptionTextAreaRef = useRef(null);
     const examplesTextAreaRef = useRef(null);
+    const relatedInputRef = useRef(null);
 
     useEffect(() => {
         setFoundResults(results);
@@ -38,16 +42,52 @@ export default function Results() {
     }
 
     async function handleSavePost(e, obj) {
+        setRelatedArray([])
+        if (descriptionTextAreaRef.current.value <= 2) {
+            return;
+        }
+        if (titleInputRef.current.value <= 2) {
+            return;
+        }
+        if (!fieldInputRef.current.value > 0) {
+            return;
+        }
 
-        if (descriptionTextAreaRef.current.value <= 2) {return}
-        if (titleInputRef.current.value <= 2) {return}
-        if (!fieldInputRef.current.value > 0) {return}
+        console.log("obj in handleSavePost: ", obj);
+        let subject;
+        let related;
+        if (obj.subject) {
+            subject = obj.subject;
+        } else {
+            subject = "";
+        }
 
-        console.log('obj in handleSavePost: ', obj);
-        let subject
-        let related
-        if (obj.subject) { subject = obj.subject } else { subject = ''}
-        if (obj.related) { related = obj.related } else { related = []}
+        let relatedToSend
+        const input = relatedInputRef.current?.value
+        let tempArray = []
+        if (obj.related) {
+            tempArray = [ ...obj.related ]
+        }
+
+        if (input && input.length > 0 ) {
+            tempArray.push(input)
+            relatedToSend = [ ...tempArray ]
+        }
+        // if (relatedArray !== obj.related && relatedArray.length > 0) {
+        //     relatedToSend = [ ...relatedArray ]
+        // }
+
+        // let processedArray = []
+        // relatedArray.forEach(relObj => {
+        //     if (obj.re )
+        // })
+        if (relatedArray.length > 0) {
+            const filteredArray = obj.related?.filter((relObj) => !relatedArray.includes(relObj))
+            relatedToSend = filteredArray
+        }
+
+        // console.log('filteredArray: ', filteredArray);
+        // return
 
         let objectToSave = {
             id: obj.id,
@@ -57,50 +97,54 @@ export default function Results() {
             description: saveFormattedText(e, descriptionTextAreaRef),
             field: fieldInputRef.current.value,
             subject: subject,
-            related: related
-        }
-        console.log('objectToSave: ', objectToSave);
-        try {
-            await editEntrie(objectToSave)
-            setEntries(await fetchAllEntries())
-            setResults(await fetchAllEntries())
-        } catch (error) {
-            console.log(error)
-        } finally {
-            setEditPosts(false)
+            related: relatedToSend,
+        };
 
+        try {
+            await editEntrie(objectToSave);
+            setEntries(await fetchAllEntries());
+            setResults(await fetchAllEntries());
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setEditPosts(false);
         }
     }
 
     function disableSpacebarToggle(e) {
-        if (e.keyCode === 32) { 
-            e.preventDefault()
-            e.target.value = e.target.value + ' '
+        if (e.keyCode === 32) {
+            e.preventDefault();
+            e.target.value = e.target.value + " ";
         }
     }
 
     function adjustTextareaHeight(elementRef) {
         if (elementRef.current) {
-            elementRef.current.style.height = 'auto';
+            elementRef.current.style.height = "0px";
             elementRef.current.style.height = `${elementRef.current.scrollHeight}px`;
-            console.log(elementRef.current.scrollHeight);
-          }
+        }
     }
 
     useEffect(() => {
-        adjustTextareaHeight(syntaxInputRef)
-        adjustTextareaHeight(examplesTextAreaRef)
-        adjustTextareaHeight(descriptionTextAreaRef)
-    })
+        adjustTextareaHeight(syntaxInputRef);
+        adjustTextareaHeight(examplesTextAreaRef);
+        adjustTextareaHeight(descriptionTextAreaRef);
+    });
 
     function handleChange(elementRef) {
-        adjustTextareaHeight(elementRef)
+        adjustTextareaHeight(elementRef);
     }
-
 
     useEffect(() => {
         console.log(editPosts);
     }, [editPosts]);
+
+    function handleDeleteRelated(obj, index) {
+
+        if (!relatedArray.includes(obj.related[index])) {
+            setRelatedArray( relatedArray + obj.related[index])
+        }
+    }
 
     return (
         <section className="Results">
@@ -109,7 +153,10 @@ export default function Results() {
                 foundResults.map((obj, index) => (
                     <div key={index}>
                         <details className="details">
-                            <summary>
+                            <summary style={{ 
+                                borderBottom: '1px solid #6a6a6a', 
+                                borderRadius: '0.2em', 
+                                background: editPosts[obj.id] && '#294269'}}>
                                 <div className="summary-header">
                                     <p id="entrie-id">#{obj.id}</p>
 
@@ -129,7 +176,9 @@ export default function Results() {
                                                 className="input-edit"
                                                 id="field-edit"
                                                 defaultValue={obj.field}
-                                                onKeyDown={(e) => disableSpacebarToggle(e)}
+                                                onKeyDown={(e) =>
+                                                    disableSpacebarToggle(e)
+                                                }
                                             ></input>
                                             <input
                                                 type="text"
@@ -138,13 +187,17 @@ export default function Results() {
                                                 className="input-edit"
                                                 id="title-edit"
                                                 defaultValue={obj.title}
-                                                onKeyDown={(e) => disableSpacebarToggle(e)}
+                                                onKeyDown={(e) =>
+                                                    disableSpacebarToggle(e)
+                                                }
                                             ></input>
                                         </div>
                                     )}
                                 </div>
 
+                                {/* SUMMARY SYNTAX SECTION */}
                                 {obj.syntax && !editPosts[obj.id] === true ? (
+                                    // SUMMARY SYNTAX VIEW
                                     <div className="markdown-summary">
                                         <pre>{obj.syntax}</pre>
                                         <button
@@ -157,37 +210,49 @@ export default function Results() {
                                             Kopiera{" "}
                                         </button>
                                     </div>
-                                ) : !editPosts[obj.id] === false && (
-                                    <textarea
-                                    name=""
-                                    id="textarea-syntax"
-                                    cols="30"
-                                    // rows="5"
-                                    placeholder="..syntax"
-                                    ref={syntaxInputRef}
-                                    defaultValue={obj.syntax}
-                                    className="markdown-summary textarea-edit "
-                                    onKeyDown={(e) => disableSpacebarToggle(e)}
-                                    onChange={() => handleChange(syntaxInputRef)}
-                                ></textarea>
+                                ) : (
+                                    // SUMMARY SYNTAX EDIT
+                                    !editPosts[obj.id] === false && (
+                                        <textarea
+                                            name=""
+                                            id="textarea-syntax"
+                                            cols="30"
+                                            placeholder="..syntax"
+                                            ref={syntaxInputRef}
+                                            defaultValue={obj.syntax}
+                                            className="markdown-summary textarea-edit "
+                                            onKeyDown={(e) =>
+                                                disableSpacebarToggle(e)
+                                            }
+                                            onChange={() =>
+                                                handleChange(syntaxInputRef)
+                                            }
+                                        ></textarea>
+                                    )
                                 )}
+
+                                {/* READ-MORE SECTION */}
                                 <div className="expand-div">
                                     <p> läs mer </p>
                                     {isExpanded ? (
                                         <IoIosArrowDropup className="toggle-view expand" />
-                                    ) : (
+                                        ) : (
                                         <MdOutlineExpandCircleDown className="toggle-view expand" />
                                     )}
                                 </div>
                             </summary>
 
                             <div className="result-card">
+
+                                {/* DESCRIPTION SECTION */}
                                 <p className="info-header">Beskrivning:</p>
                                 {!editPosts[obj.id] ? (
+                                    // description view
                                     <pre className="description">
                                         {obj.description}{" "}
                                     </pre>
                                 ) : (
+                                    // description edit
                                     <textarea
                                         name=""
                                         id="description-edit"
@@ -197,77 +262,118 @@ export default function Results() {
                                         ref={descriptionTextAreaRef}
                                         defaultValue={obj.description}
                                         className="textarea-edit"
-                                        onChange={() => handleChange(descriptionTextAreaRef)}
+                                        onChange={() =>
+                                            handleChange(descriptionTextAreaRef)
+                                        }
                                     ></textarea>
                                 )}
-                                {obj.examples && !editPosts[obj.id] === true ? (
-                                    <>
-                                    <p className="info-header">Exempel:</p>
-                                        <div className="markdown">
-                                            <pre>{obj.examples}</pre>
-                                            <button
-                                                className="copy-button example"
-                                                onClick={() =>
-                                                    copyToClipboard(
-                                                        obj.examples
+
+                                {/* EXAMPLES */}
+                                {obj.examples &&
+                                    !editPosts[obj.id] === true ? (
+                                        // examples view
+                                        <>
+                                            <p className="info-header">
+                                                Exempel:
+                                            </p>
+                                            <div className="markdown">
+                                                <pre>{obj.examples}</pre>
+                                                <button
+                                                    className="copy-button example"
+                                                    onClick={() =>
+                                                        copyToClipboard(
+                                                            obj.examples
                                                         )
-                                                }
-                                            >
-                                                Kopiera
-                                            </button>
-                                        </div>
-                                    </>
-                                ) : editPosts[obj.id] === true && (
-                                    <>
-                                        <p className="info-header">Exempel:</p>
-                                        <textarea
-                                            name=""
-                                            id="textarea-examples"
-                                            cols="30"
-                                            // rows="5"
-                                            // placeholder={obj.examples}
-                                            ref={examplesTextAreaRef}
-                                            defaultValue={obj.examples}
-                                            className="textarea-edit"
-                                            onChange={() => handleChange(examplesTextAreaRef)}
-                                        ></textarea>
-                                    </>
-                                )}
-                                <div>
-                                    {!editPosts ? (
+                                                    }
+                                                >
+                                                    Kopiera
+                                                </button>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        editPosts[obj.id] === true && (
+                                            // examples edit
+                                            <>
+                                                <p className="info-header">
+                                                    Exempel:
+                                                </p>
+                                                <textarea
+                                                    name=""
+                                                    id="textarea-examples"
+                                                    cols="30"
+                                                    ref={examplesTextAreaRef}
+                                                    defaultValue={obj.examples}
+                                                    className="textarea-edit"
+                                                    onChange={() =>
+                                                        handleChange(
+                                                            examplesTextAreaRef
+                                                        )
+                                                    }
+                                                ></textarea>
+                                            </>
+                                        )
+                                    )
+                                }
+
+                                {/* SECTION FOR EDIT/SAVE/CANCEL BUTTONS */}
+                                <div className="edit-buttons-container">
+                                    {!editPosts[obj.id] === true ? (
+                                        // Edit-button
                                         <button
+                                            className="entrie-edit-button"
+                                            id="edit-post-button"
                                             onClick={() => {
                                                 handleEditPost(obj.id);
-                                            }}
-                                        >
-                                            {" "}
-                                            Redigera{" "}
+                                            }} > Redigera post
                                         </button>
                                     ) : (
                                         <div className>
+                                            {/* Cancel-button */}
                                             <button
-                                                onClick={() =>
-                                                    setEditPosts(!editPosts)
-                                                }
-                                            >
-                                                Avbryt
+                                            className="entrie-edit-button"
+                                            id="edit-post-button-cancel"
+                                            onClick={() =>{
+                                                setEditPosts(!editPosts),
+                                                setRelatedArray([])
+                                                }}> Avbryt 
                                             </button>
-                                            <button onClick={(e) => handleSavePost(e, obj)}> Spara </button>
+
+                                            {/* Save-button */}
+                                            <button
+                                                className="entrie-edit-button"
+                                                id="edit-post-button-save"
+                                                onClick={(e) =>
+                                                    handleSavePost(e, obj)
+                                                }> Spara
+                                            </button>
                                         </div>
                                     )}
                                 </div>
                             </div>
+                            {/* RELATED SECTION */}
                             <div className="related">
                                 <p> Relaterat: </p>
+                                
+                                { editPosts[obj.id] === true && 
+                                    <input 
+                                        type="text" 
+                                        ref={relatedInputRef}
+                                        id="related-input"
+                                        placeholder=".. lägg till?"
+                                        />
+                                }
+
                                 {obj.related?.length > 0 &&
                                     obj.related?.map((relatedObject, index) => (
-                                        <p
-                                            key={index}
-                                            className="related-subject"
-                                        >
-                                            {" "}
-                                            {relatedObject}{" "}
-                                        </p>
+                                        <div className={`related-object ${relatedArray.includes(relatedObject) ? 'marked-for-deletion' : '' }`}>
+                                            <p key={index} className="related-subject">
+                                                {relatedObject}
+                                            </p>
+                                            {editPosts[obj.id] === true && <IoMdCloseCircle 
+                                                id="icon-remove-related"
+                                                onClick={() => handleDeleteRelated(obj, index)}
+                                            />}
+                                        </div>
                                     ))}
                             </div>
                         </details>

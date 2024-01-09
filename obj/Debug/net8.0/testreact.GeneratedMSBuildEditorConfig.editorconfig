@@ -17,19 +17,19 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = testreact
 build_property.RootNamespace = testreact
-build_property.ProjectDir = /home/gost/Dokument/github/CodeFlow/
+build_property.ProjectDir = /home/haedan/Dokument/github/csharp/CodeFlow/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /home/gost/Dokument/github/CodeFlow
+build_property.MSBuildProjectDirectory = /home/haedan/Dokument/github/csharp/CodeFlow
 build_property._RazorSourceGeneratorDebug = 
 
-[/home/gost/Dokument/github/CodeFlow/Pages/Error.cshtml]
+[/home/haedan/Dokument/github/csharp/CodeFlow/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/gost/Dokument/github/CodeFlow/Pages/_ViewImports.cshtml]
+[/home/haedan/Dokument/github/csharp/CodeFlow/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

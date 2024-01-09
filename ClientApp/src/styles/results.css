@@ -223,19 +223,21 @@ pre {
     background: #101319;
     border-top: 2px solid rgb(20, 27, 39);
     color: var(--text-color-white);
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     align-items: center;
     font-size: 0.9em;
     margin-bottom: 1em;
     padding: 0em 0.1em;
     gap: 0.6em;
+    overflow: auto;
+    
 
     & p {
         color: rgb(175, 175, 175);
     }
 
-    & > .related-subject {
+    & .related-subject {
         margin-left: 0.5em;
         color: rgb(93, 118, 155);
         font-size: 0.7em;
@@ -246,13 +248,7 @@ pre {
         font-family: monospace;
         font-size: 0.6em;
         
-        &:hover {
-            /* border: 1px solid var(--border-color); */
-            transform: scale(var(--hover-scale));
-            background: var(--background-black);
-            cursor: pointer;
-            color: var(--text-color-white);
-        }
+
     }
 }
 
@@ -292,19 +288,25 @@ input::placeholder{
 #field-edit {
     width: 10em;
     color: var(--text-color-blue);
-    font-size: 0.7em;
+    font-size: 0.8em;
+    outline: 1px dashed rgb(145, 145, 145);
 }
 
 #title-edit {
     padding: 0em;
     min-height: 100%;
     width: 100%;
-    font-size: 0.7em;
+    font-size: 0.9em;
+    outline: 1px dashed rgb(145, 145, 145);
 }
 
 #description-edit {
-    padding-left: 0.5em;
+    /* padding-left: 0.5em; */
     padding-right: 0.5em;
+    background: black;
+    outline: 1px dashed rgb(145, 145, 145);
+    margin-bottom: 0.3em;
+    margin-top: 0.3em;
 }
 
 #textarea-syntax, #textarea-examples {
@@ -313,6 +315,17 @@ input::placeholder{
     font-family: monospace;
     margin: 0.5em;
     padding-left: 0.5em;
+    background: black;
+    outline: 1px dashed rgb(145, 145, 145);
+}
+
+#textarea-examples {
+    margin-top: 0.6em;
+}
+
+#textarea-syntax {
+    width: 96%;
+    margin-top: 0em;
 }
 
 .edit-field-title-container {
@@ -321,4 +334,96 @@ input::placeholder{
     gap: 0.5em;
     padding: 0.3em 0.5em 0em 0.5em;
     width: 100%;
+}
+
+/* EDIT POST BUTTONS */
+.Results .edit-buttons-container {
+    position: absolute;
+    bottom: 0em;
+    /* left: 0em; */
+    display: flex;
+    justify-content: center;
+    /* width: 50%; */
+}
+.Results .edit-buttons-container button {
+    border: none;
+    font-size: 0.7em;
+    padding: 0em 0.5em;
+    margin-right: 0.5em;
+    background-color: #12142000;
+    border: 1px solid rgb(84, 84, 84);
+    /* border-radius: 0.2em 0.2em 0em 0em; */
+    border-bottom: none;
+    color: rgb(122, 122, 122);
+    transition: var(--hover-duration);
+    
+    &:hover {
+        transition: var(--hover-duration);
+        /* scale: var(--hover-scale); */
+        color: white;
+    }
+}
+
+/* "Redigera post" button */
+.Results .edit-buttons-container #edit-post-button {
+    
+}
+
+/* "Avbryt" button */
+.Results .edit-buttons-container #edit-post-button-cancel {
+    background: var(--button-color-red);
+    color: white;
+    border: none;
+    transition: var(--hover-duration);
+    &:hover {
+        background: var(--button-color-red-hover);
+    }
+    &:active {
+        background: var(--button-color-red-active);
+    }
+}
+
+/* "Spara" button */
+.Results .edit-buttons-container #edit-post-button-save {
+    background-color: var(--button-color-blue);
+    color: white;
+    border: none;
+    transition: var(--hover-duration);
+    &:hover {
+        transition: var(--hover-duration);
+        background: var(--button-color-blue-hover);
+    }
+    &:active {
+        background: var(--button-color-blue-active);
+    }
+}
+
+#related-input {
+    background: var(--background-markdown);
+    color: white;
+    width: 8em;
+    font-size: 0.8em;
+    border-right: none;
+}
+
+#icon-remove-related {
+    cursor: pointer;
+    min-width: 15px;
+}
+
+.related-object {
+    display: flex;
+    transition: var(--hover-duration);
+
+    &:hover {
+        /* border: 1px solid var(--border-color); */
+        transform: scale(var(--hover-scale));
+        background: var(--background-black);
+        cursor: pointer;
+        color: var(--text-color-white);
+    }
+}
+
+.Results .related .marked-for-deletion * {
+    color: rgba(255, 0, 0, 0.766);
 }

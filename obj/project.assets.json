@@ -7839,19 +7839,19 @@
     ]
   },
   "packageFolders": {
-    "/home/gost/.nuget/packages/": {}
+    "/home/haedan/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/gost/Dokument/github/CodeFlow/testreact.csproj",
+      "projectUniqueName": "/home/haedan/Dokument/github/csharp/CodeFlow/testreact.csproj",
       "projectName": "testreact",
-      "projectPath": "/home/gost/Dokument/github/CodeFlow/testreact.csproj",
-      "packagesPath": "/home/gost/.nuget/packages/",
-      "outputPath": "/home/gost/Dokument/github/CodeFlow/obj/",
+      "projectPath": "/home/haedan/Dokument/github/csharp/CodeFlow/testreact.csproj",
+      "packagesPath": "/home/haedan/.nuget/packages/",
+      "outputPath": "/home/haedan/Dokument/github/csharp/CodeFlow/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/gost/.nuget/NuGet/NuGet.Config"
+        "/home/haedan/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"

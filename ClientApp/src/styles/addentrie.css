@@ -45,7 +45,7 @@
 textarea {
     background: var(--background-markdown);
     color: white;
-    transition: 0.2s;
+    /* transition: 0.2s; */
     color: 0.8em;
     width: 100%;
     border: none;
@@ -85,7 +85,7 @@ textarea {
     width: 1.3em;
     height: 1.3em;
     color: #a99797;
-    transition: 0.2s;
+    /* transition: 0.2s; */
 
     &:hover {color: #c12424}
     &:active {color: #671313}
@@ -108,7 +108,7 @@ textarea {
     padding: 0.5em 1em;
     color: white;
     border: none;
-    transition: 0.2s;
+    /* transition: 0.2s; */
     font-size: 0.7em;
     /* box-shadow: 0px -2px 15px 1px rgba(0, 0, 0, 0.518); */
     width: 6em;
